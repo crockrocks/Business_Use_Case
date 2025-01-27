@@ -121,4 +121,12 @@ Aggregates relevant resources and implementation guidelines for each use case.
 - `GROQ_API_KEY`: For LLM access
 - `SERPER_API_KEY`: For web research
 
+## High Level System Architecture 
+![Untitled diagram-2025-01-27-131758](https://github.com/user-attachments/assets/4fddf8ae-4576-4839-85e0-9e46aa3089ba)
+
+---
+
+## Component Flow
+![Untitled diagram-2025-01-27-132257](https://github.com/user-attachments/assets/b38adc13-f54b-49a4-bc27-4cce7f13479a)
+
 ---
