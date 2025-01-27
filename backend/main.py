@@ -1,8 +1,9 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import json
 from datetime import datetime
 from pathlib import Path
+import shutil
 import logging
 import sys
 from agent_researcher import research_company_and_industry
@@ -20,7 +21,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+app = Flask(__name__, 
+    static_folder='./dist',  
+    static_url_path=''
+)
 CORS(app)
 
 class ReportGenerator:
@@ -109,6 +113,17 @@ class ReportGenerator:
         except Exception as e:
             logger.error(f"Error saving report: {str(e)}")
             raise
+
+@app.route('/')
+def serve_react():
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/<path:path>')
+def catch_all(path):
+    try:
+        return send_from_directory(app.static_folder, path)
+    except:
+        return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/generate-report', methods=['POST'])
 def generate_report():
